@@ -131,3 +131,22 @@ In AWS, for example, an EC2 instance has an **Elastic Network Interface (ENI)**.
 > **A network interface in Linux is a logical or physical network endpoint used by the operating system to send and receive network packets. It has properties such as an IP address, MAC address, and link state.**
 
 If you're learning this for **Linux/DevOps**, the next important concept is understanding **NIC → IP → subnet → gateway → routing table → DNS**, because these all work together when troubleshooting network connectivity.
+
+-----------------------------------------
+
+## How IP address assigned to EC2/Server?
+
+### How IP Assignment Works in AWS
+
+**1. VPC and Subnets**
+
+ - Every EC2 instance lives inside a VPC (Virtual Private Cloud), which is divided into subnets (each with its own CIDR range, e.g., 10.0.1.0/24).
+
+ - When you launch an instance into a subnet, AWS auto-assigns a private IP from that subnet's range (unless you specify one manually).
+
+**2. Private IP Assignment**
+
+ - AWS runs an internal DHCP server for each VPC (via the "DHCP Options Set").
+ - When an EC2 instance boots, its Elastic Network Interface (ENI) requests an IP via DHCP, and AWS's DHCP server leases it a private IP from the subnet's range.
+   This private IP is persistent for the life of the instance
+
