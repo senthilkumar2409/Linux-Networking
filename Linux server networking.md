@@ -1,5 +1,5 @@
 
-## Network Interface:
+## 1. Network Interface:
 
 In a Linux server, a **network interface** is the component that allows the server to communicate with a network.
 
@@ -134,7 +134,7 @@ If you're learning this for **Linux/DevOps**, the next important concept is unde
 
 -----------------------------------------
 
-## How IP address assigned to EC2/Server?
+## 2. How IP address assigned to EC2/Server?
 
 ### How IP Assignment Works in AWS
 
@@ -149,4 +149,27 @@ If you're learning this for **Linux/DevOps**, the next important concept is unde
  - AWS runs an internal DHCP server for each VPC (via the "DHCP Options Set").
  - When an EC2 instance boots, its Elastic Network Interface (ENI) requests an IP via DHCP, and AWS's DHCP server leases it a private IP from the subnet's range.
    This private IP is persistent for the life of the instance
+
+----------------------------------------------
+
+## 3. While ec2 instance creation, the network interface is created automatically?
+
+ - Yes — Automatically, Unless You Customize It
+
+ - When you launch an EC2 instance, AWS automatically creates a primary Elastic Network Interface (ENI) for it — you don't have to do anything extra for basic use cases.
+
+ **What Happens Automatically**
+  - AWS creates a primary ENI (eth0) in the subnet you selected.
+  - It assigns a primary private IP from that subnet's CIDR range.
+  - If the subnet has "auto-assign public IP" enabled, AWS also assigns a public IP (via NAT at the Internet Gateway, not directly on the ENI).
+  - A MAC address is generated for the ENI.
+  - The default security group (or one you selected) gets attached to this ENI.
+  - This primary ENI is automatically deleted when you terminate the instance (you can't detach or delete it manually while the instance is running — it's tied to the instance's lifecycle).
+
+------------------------------------------------------
+## 4. My question, once I launched the ec2 in console on private ipv4 address shown is ENI IP?
+
+ Yes, exactly.
+
+ - When you launch an EC2 instance and look at the console (or run describe-instances), the "Private IPv4 address" field you see is simply the primary private IP of the primary ENI attached to that instance.
 
