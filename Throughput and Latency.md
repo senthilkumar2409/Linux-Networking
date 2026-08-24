@@ -1,4 +1,4 @@
-## throughput
+## Throughput
  
  **Server** 
    - The total number of request processed at a time, Like how many client requests, transactions, or megabytes the server handles per second or minute.
