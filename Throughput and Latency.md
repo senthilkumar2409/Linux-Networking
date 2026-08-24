@@ -1,15 +1,15 @@
 ## throughput
  
-  **Server** 
-    - The total number of request processed at a time, Like how many client requests, transactions, or megabytes the server handles per second or minute.
-    - How efficiently the server application handles concurrent requests.
-    - **Requests per second (RPS):** Counts web or API calls.**Transactions per second (TPS):** Counts database or payment actions.**Megabytes per second (MBps):** Counts data sent or received
+ **Server** 
+   - The total number of request processed at a time, Like how many client requests, transactions, or megabytes the server handles per second or minute.
+   - How efficiently the server application handles concurrent requests.
+   - **Requests per second (RPS):** Counts web or API calls.**Transactions per second (TPS):** Counts database or payment actions.**Megabytes per second (MBps):** Counts data sent or received
     
-  **Network** - Throughput is the actual amount of data successfully transferred between two points (like a client and server, or across a network link) in a given amount of time — usually measured in bits per second (bps), or larger units like Kbps, Mbps, Gbps.
+ **Network** - Throughput is the actual amount of data successfully transferred between two points (like a client and server, or across a network link) in a given amount of time — usually measured in bits per second (bps), or larger units like Kbps, Mbps, Gbps.
 
 ## Latency
-    - A time taken to process a request
-    - Latency is the time delay between sending a request and receiving the first response — essentially, how long it takes for data to travel from source to destination (and often back again). It's usually measured in milliseconds (ms).
+   - A time taken to process a request
+   - Latency is the time delay between sending a request and receiving the first response — essentially, how long it takes for data to travel from source to destination (and often back again). It's usually measured in milliseconds (ms).
 
 
 ## IOPS
