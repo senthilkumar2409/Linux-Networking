@@ -48,3 +48,14 @@
 
  <img width="882" height="465" alt="image" src="https://github.com/user-attachments/assets/f22db202-d661-4573-9564-ba4a2d870f53" />
 
+
+## Query Optimization
+
+**Who Does Query Optimization?**
+
+ - Developers: Write efficient initial queries, pick specific columns instead of wildcards, and avoid loops.
+ - Database Administrators (DBAs): Monitor overall server health, build indexes, and fix deep system bottlenecks.Database Engines: Use built-in cost-based optimizers to pick the best execution path automatically.
+ 
+ **Is It a Developer Responsibility?** 
+  - Writing clean code: Developers must write fast queries from the start because they know the application context best.
+  - Basic tuning: Developers should use proper joins, filter with WHERE instead of HAVING, and test execution plans.Team collaboration: Complex indexing or server configurations are usually handed off to a DBA or data engineer.
