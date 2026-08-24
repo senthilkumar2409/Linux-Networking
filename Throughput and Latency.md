@@ -1,3 +1,6 @@
+## Database I/O issue - 
+ https://aws.amazon.com/blogs/database/capture-and-diagnose-i-o-bottlenecks-on-amazon-rds-for-sql-server/
+
 ## Throughput
  
  **Server** 
