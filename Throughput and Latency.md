@@ -28,6 +28,18 @@
 
  - A database index is a supplementary data structure used to **speed up data retrieval operations** by minimizing the number of disk accesses required to locate records.
  - Think of it exactly like an index at the back of a textbook; instead of flipping through every single page to find a specific topic, you look up the topic alphabetically in the index and jump directly to the correct page number.
+   
+### what happen if we don't have index?
+ - Without an index, the database must perform a Full Table Scan for every single query.
+ - This means the database engine has to look at every single row, from the very first to the very last, to see if it matches your search criteria.
+
+## What Happens to the Database
+
+* Severe Slowness: A search that takes milliseconds with an index can take minutes without one as your data grows.
+* High CPU Usage: The database server wastes massive amounts of processor power reading endless rows of data.
+* Disk Bottlenecks: The system is forced to constantly read data from the hard drive, slowing down the entire server.
+* Application Crashes: Queries may take so long that they hit a timeout limit and fail completely.
+* User Frustration: Websites or apps loading data will spin endlessly, causing a terrible user experience.
 
  ### The Ultimate Trade-Off:
 
