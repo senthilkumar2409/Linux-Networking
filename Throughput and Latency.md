@@ -21,3 +21,6 @@
  Key ConceptsRead and Write:
  - Read means pulling data off the drive. Write means saving data to the drive.
  - Why it matters: High IOPS helps databases and virtual machines run fast. Traditional hard drives (HDDs) have low IOPS, while solid-state drives (SSDs) and NVMe drives have very high IOPS
+
+<img width="812" height="235" alt="image" src="https://github.com/user-attachments/assets/159412b0-0b22-4c89-8926-cf0d94c13c6f" />
+
