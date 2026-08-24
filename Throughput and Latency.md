@@ -5,7 +5,8 @@
    - How efficiently the server application handles concurrent requests.
    - **Requests per second (RPS):** Counts web or API calls.**Transactions per second (TPS):** Counts database or payment actions.**Megabytes per second (MBps):** Counts data sent or received
     
- **Network** - Throughput is the actual amount of data successfully transferred between two points (like a client and server, or across a network link) in a given amount of time — usually measured in bits per second (bps), or larger units like Kbps, Mbps, Gbps.
+ **Network** 
+   - Throughput is the actual amount of data successfully transferred between two points (like a client and server, or across a network link) in a given amount of time — usually measured in bits per second (bps), or larger units like Kbps, Mbps, Gbps.
 
 ## Latency
    - A time taken to process a request
