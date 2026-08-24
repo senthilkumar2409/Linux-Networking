@@ -24,3 +24,6 @@
 
 <img width="812" height="235" alt="image" src="https://github.com/user-attachments/assets/159412b0-0b22-4c89-8926-cf0d94c13c6f" />
 
+## indexing in database:
+
+ - A database index is a supplementary data structure used to speed up data retrieval operations by minimizing the number of disk accesses required to locate records. Think of it exactly like an index at the back of a textbook; instead of flipping through every single page to find a specific topic, you look up the topic alphabetically in the index and jump directly to the correct page number.
