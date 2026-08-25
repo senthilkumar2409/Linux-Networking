@@ -71,6 +71,21 @@ Every query — whether from a "new" or "reused" connection — still goes all t
 - Apps that rely heavily on session-level features (prepared statements tied to session state, temp tables, advisory locks) — pinning behavior can negate the pooling benefit
 - Extremely latency-sensitive workloads where even the small added hop through the proxy matters more than the connection-management benefit
 
+### you mean a request A (for transaction) processed already and cached in rds proxy, if we get any other connection for same request, It will uses that cached request right? if it's totally a new connection then it will get it from rds database?
+
+That's a common mix-up — but RDS Proxy does not cache query results or "requests." It has nothing to do with data caching at all. Let me clarify what's actually happening, because the distinction matters a lot.
+
+**What RDS Proxy actually reuses**
+
+It reuses physical network connections, not data or query results.
+
+**Think of it this way:**
+
+A "connection" is just an open pipe/socket to the database — it doesn't carry any memory of what was asked through it before.
+When App Instance 1 sends a query, RDS Proxy picks one of its already-open backend connections (instead of opening a brand new one) and forwards the query through it.
+The database still executes that query fresh, every single time. RDS Proxy does not intercept, remember, or short-circuit the query itself.
+
+
 ## One-line summary to remember
 
 > **Multiplexing** = many passengers sharing few taxis (connection reuse).
