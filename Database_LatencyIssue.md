@@ -1,6 +1,6 @@
 # Diagnosing Increased Latency in RDS Reads
 
-Use AWS Cloudwatch Database Insights for metrics to identify the issue. https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
+**Use AWS Cloudwatch Database Insights for metrics to identify the issue.** https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 
 When an application reads from RDS and users experience increased latency, the cause usually falls into one of several categories. Let's go through the likely culprits systematically.
 
