@@ -1,5 +1,7 @@
 # Diagnosing Increased Latency in RDS Reads
 
+Use AWS Cloudwatch Database Insights for metrics to identify the issue. https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
+
 When an application reads from RDS and users experience increased latency, the cause usually falls into one of several categories. Let's go through the likely culprits systematically.
 
 ---
@@ -135,5 +137,5 @@ Code like "get all orders, then for each order get the customer" looks clean in 
 The fastest way to narrow down the root cause is to answer:  
 **Is the latency in the query execution itself, or in waiting to get a connection/lock before the query even starts?**  
 
-These point to almost entirely different fixes, and most monitoring tools (like RDS Performance Insights) can show you which one it is within minutes.
+These point to almost entirely different fixes, and most monitoring tools (like **RDS Performance Insights**) can show you which one it is within minutes.
 
