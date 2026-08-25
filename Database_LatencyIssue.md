@@ -19,9 +19,9 @@ When an application reads from RDS and users experience increased latency, the c
 - High `DatabaseConnections` count nearing max — connection pool exhaustion causes queueing
 
 ### Locking/blocking
+- A write operation locks the data, making read operations wait in line.
 - Long-running transactions holding locks
 - Deadlocks or lock waits from concurrent writes blocking reads
-- Table locks during schema migrations or large batch updates
 
 ---
 
