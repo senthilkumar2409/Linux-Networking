@@ -104,8 +104,42 @@ helm upgrade myapp ./chart --kube-context eks-eu-west-1 -f values-eu.yaml
 ## ✅ Bottom Line
 Pick one GitOps tool (**Argo CD ApplicationSet is the most common pattern**) that treats each regional cluster as a deploy target.  
 Reuse the same manifests/chart with per‑region value overrides — that’s how you deploy pods *to all region clusters* without duplicating pipelines per region.
-```
 
 This version is structured for readability, with clear sections, code blocks, and callouts.  
-
 👉 Do you want me to extend this with a **sample `ApplicationSet` manifest YAML** using the cluster generator, so you can see how it looks in practice?
+
+----
+## Data Replication - Aurora Global Database
+
+Exactly right — that's the core mechanic. Let me walk through what actually happens on the wire.
+
+**The setup: two separate DB connection strings per region**
+
+Every regional Aurora cluster gives you two endpoints:
+- **Cluster endpoint** (the primary, read-write) — only exists as read-write in the primary region
+- **Reader endpoint** (read-only replica) — exists locally in every region
+
+So your pods in Region B are configured with:
+- `DB_READ_HOST` → Region B's local Aurora reader endpoint
+- `DB_WRITE_HOST` → Region A's Aurora **primary cluster endpoint** (yes, the actual one sitting in Region A)
+
+**What happens for a write from Region B**
+
+1. Request lands on a pod in Region B
+2. App logic (or an ORM read/write split, or a proxy like RDS Proxy / PgBouncer) detects it's a write
+3. The pod opens a connection **across the AWS backbone network, cross-region**, directly to Region A's Aurora write endpoint
+4. That's a real network hop — Region B → Region A, over AWS's private inter-region backbone (not public internet), typically adding tens of milliseconds depending on the region pair
+5. Aurora in Region A commits the write
+6. Aurora Global Database's storage-layer replication then propagates that write back out to Region B's (and every other region's) read replica, usually in under a second
+
+**So the latency story is:**
+- **Reads in Region B**: fast, local, no cross-region hop
+- **Writes from Region B**: slower, because the write physically travels to Region A and back before the pod gets an ack
+- **Reads immediately after a write** (read-your-own-write from Region B): may briefly return stale data if you read from the local replica before replication catches up — this is the "eventual consistency" trade-off from the article
+
+**How teams keep this from being messy in code**
+- RDS Proxy or a connection-pooling/routing layer that auto-directs reads vs writes to the correct endpoint, so app code doesn't manually pick hosts per query
+- Some apps route reads-after-writes to the primary too (for a short window) to avoid stale-read UX bugs
+- Sticky-session-free apps handle this fine since it's per-request routing, not per-user-session routing
+
+This cross-region write hop is exactly why the earlier point matters: if your workload is write-heavy, this pattern hurts — you're paying inter-region latency on every write no matter which region the user hit. It only works well when reads dominate.
